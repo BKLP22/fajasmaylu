@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PsShop index{% endblock %}
+
+{% block body %}
+    <h1>PsShop index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdShop</th>
+                <th>IdShopGroup</th>
+                <th>Name</th>
+                <th>IdCategory</th>
+                <th>ThemeName</th>
+                <th>Active</th>
+                <th>Deleted</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ps_shop in ps_shops %}
+            <tr>
+                <td>{{ ps_shop.idShop }}</td>
+                <td>{{ ps_shop.idShopGroup }}</td>
+                <td>{{ ps_shop.name }}</td>
+                <td>{{ ps_shop.idCategory }}</td>
+                <td>{{ ps_shop.themeName }}</td>
+                <td>{{ ps_shop.active ? 'Yes' : 'No' }}</td>
+                <td>{{ ps_shop.deleted ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_ps_shop_show', {'idShop': ps_shop.idShop}) }}">show</a>
+                    <a href="{{ path('app_ps_shop_edit', {'idShop': ps_shop.idShop}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_ps_shop_new') }}">Create new</a>
+{% endblock %}
